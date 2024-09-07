@@ -40,15 +40,16 @@ pipeline {
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
-
+        
         stage('SONARQUBE ANALYSIS') {
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('SonarQube') {
                     sh "${SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectName=Bank-Fullstack -Dsonar.projectKey=Bank-Fullstack"
                 }
             }
         }
         
+            
         stage('Install Dependencies') {
             steps {
                 sh "npm install"
